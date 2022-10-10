@@ -1,3 +1,5 @@
+if mp.get_property_bool('osc', true) then return end
+
 local assdraw = require "mp.assdraw"
 local msg = require "mp.msg"
 local opt = require "mp.options"
