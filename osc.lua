@@ -80,7 +80,7 @@ local santa_hat_lines = {
     "{\\c&HF8F8F8&\\p6}m 626 -191 b 565 -155 486 -196 428 -151 387 -115 327 -101 304 -47 273 2 267 59 249 113 219 157 217 213 215 265 217 309 260 302 285 283 373 264 465 264 555 257 608 252 655 292 709 287 759 294 816 276 863 298 903 340 972 324 1012 367 1061 394 1125 382 1167 424 1213 462 1268 482 1322 506 1385 546 1427 610 1479 662 1510 690 1534 725 1566 752 1611 796 1664 830 1703 880 1740 918 1747 986 1805 1005 1863 991 1897 932 1916 880 1914 823 1945 777 1961 725 1979 673 1957 622 1938 575 1912 534 1862 515 1836 473 1790 417 1755 351 1697 305 1658 266 1633 216 1593 176 1574 138 1539 116 1497 110 1448 101 1402 77 1371 37 1346 -16 1295 15 1254 6 1211 -27 1170 -62 1121 -86 1072 -104 1027 -128 976 -133 914 -130 851 -137 794 -162 740 -181 679 -168 626 -191 m 2051 917 b 1971 932 1929 1017 1919 1091 1912 1149 1923 1214 1970 1254 2000 1279 2027 1314 2066 1325 2139 1338 2212 1295 2254 1238 2281 1203 2287 1158 2282 1116 2292 1061 2273 1006 2229 970 2206 941 2167 938 2138 918{\\p0}",
 }
 
-local function set_osd(res_x, res_y, text)
+local function set_osd(res_x, res_y, text, z)
     if osd.res_x == res_x and
         osd.res_y == res_y and
         osd.data == text then
@@ -89,7 +89,7 @@ local function set_osd(res_x, res_y, text)
     osd.res_x = res_x
     osd.res_y = res_y
     osd.data = text
-    osd.z = 1000
+    osd.z = z
     osd:update()
 end
 
@@ -121,15 +121,15 @@ local function render_message()
         -- submit
         ass:new_event()
         ass:append(style .. message_text)
-        set_osd(osc_param.playresy * osc_param.display_aspect, osc_param.playresy, ass.text)
+        set_osd(osc_param.playresy * osc_param.display_aspect, osc_param.playresy, ass.text, 1000)
     else
         message_text = nil
-        set_osd(0, 0, '')
+        set_osd(0, 0, '', 1000)
     end
 end
 
 local function render_idle()
-    if not options.idlescreen then set_osd(0, 0, '') return end
+    if not options.idlescreen then set_osd(0, 0, '', 1000) return end
 
     -- render idle message
     msg.trace("idle message")
@@ -160,7 +160,7 @@ local function render_idle()
     ass:an(8)
     ass:append("Drop files or URLs to play here.")
 
-    set_osd(display_w, display_h, ass.text)
+    set_osd(display_w, display_h, ass.text, -1000)
 end
 
 local render_last_time = 0
