@@ -386,7 +386,10 @@ end)
 mp.register_script_message("osc-idlescreen", function(mode, no_osd)
     if mode == "cycle" then mode = options.idlescreen and "no" or "yes" end
     options.idlescreen = mode == "yes"
-    utils.shared_script_property_set("osc-idlescreen", mode)
+    if utils.shared_script_property_set then
+        utils.shared_script_property_set("osc-idlescreen", mode)
+    end
+    mp.set_property_native("user-data/osc/idlescreen", options.idlescreen)
 
     if not no_osd and mp.get_property_number("osd-level", 1) >= 1 then
         mp.osd_message("OSC logo visibility: " .. tostring(mode))
