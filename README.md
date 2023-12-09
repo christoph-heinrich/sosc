@@ -8,5 +8,5 @@ Your configuration for the original OSC will be used automatically.
 
 ## Installation
 1. Save the `osc.lua` into your [scripts directory](https://mpv.io/manual/stable/#script-location)
-2. Make sure you have `osc=no` in your [mpv.conf](https://mpv.io/manual/stable/#configuration-files).
+2. Make sure you have `osc=no` in your [mpv.conf](https://mpv.io/manual/stable/#configuration-files)
 3. For [uosc](https://github.com/tomasklaen/uosc) make sure you have `disable_elements=idle_indicator` in your [mpv.conf](https://mpv.io/manual/stable/#configuration-files).
